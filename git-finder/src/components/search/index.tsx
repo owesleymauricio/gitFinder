@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, Input, Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, KeyboardEvent } from 'react'
 import { BsSearch } from 'react-icons/bs'
 
 type SearchProps = {
@@ -9,6 +9,19 @@ type SearchProps = {
 const Search = ({loadUser}: SearchProps) => {
 
     const [userName, setUserName] = useState("")
+
+    const handleKeyDown = (event: KeyboardEvent) => { // essa tipagem é um evento do teclado
+        if( event.key === "Enter" ){
+            loadUser(userName)
+        }
+      
+    }
+
+    const handleSearchClick = () => {
+        loadUser(userName);
+        setUserName("")
+    };
+    
     return (
         <Flex flexDirection={'column'}>
             <Heading>Busque por um usario</Heading>
@@ -16,11 +29,12 @@ const Search = ({loadUser}: SearchProps) => {
             <Flex>
                 <Input
                  type='text'
-                  placeholder='Digite sua bisca'
+                  placeholder='Digite sua busca'
                   onChange={(event) => setUserName(event.target.value)}
                   marginRight={'5px'}
+                  onKeyDown={handleKeyDown}
                   />
-                <Button onClick={() => loadUser(userName)}>
+                <Button onClick={handleSearchClick}>
                     <BsSearch />
                 </Button>
             </Flex>
