@@ -5,7 +5,11 @@ const BtnBack = () => {
     const router: NextRouter = useRouter()
   return (
     <>
-    <Button onClick={() => router.push("/")}>
+    <Button
+    width={'200px'}
+    height={'60px'}
+    fontSize={'30px'}
+    onClick={() => router.push("/")}>
         Voltar
     </Button>
     </>
